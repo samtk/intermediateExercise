@@ -67,7 +67,7 @@ public class Garage {
 	 * Takes a vehicle as input and calculates the bill for motorcycles
 	 * @param vehicle
 	 */
-	public int calculateMotorcycleBill(Vehicle motorcycle) {
+	public int calculateMotorcycleBill(Motorcycle motorcycle) {
 		return motorcycle.getNumberOfWheels() * 100 * motorcycle.getAge() ;
 	}
 	
@@ -76,8 +76,10 @@ public class Garage {
 	 * Takes a vehicle as input and calculates the bill for cars
 	 * @param vehicle
 	 */
-	public int calculateCarBill(Vehicle car) {
-		return car.getNumberOfWheels() * 100 * car.getAge();
+	public int calculateCarBill(Car car) {	
+		int value = 50;
+		if (car.getAutomatic()) value = 100;
+		return car.getNumberOfWheels() * value * car.getAge();
 	}
 	
 	/**
@@ -85,8 +87,8 @@ public class Garage {
 	 * Takes a vehicle as input and calculates the bill for rockets
 	 * @param vehicle
 	 */
-	public int calculateRocketBill(Vehicle rocket) {
-		return rocket.getAge() * 100000;
+	public int calculateRocketBill(Rocket rocket) {
+		return rocket.getNumberofthrusters() * 10000;
 	}
 	
 	
@@ -98,13 +100,13 @@ public class Garage {
 	public int calculateVehicleBill(int id) {
 		int total = 0;
 		if(garage.get(id).getType().equals("car")) {
-			total += calculateCarBill(garage.get(id));
+			total += calculateCarBill((Car)garage.get(id));
 		}
 		if(garage.get(id).getType().equals("motorcycle")) {
-			total += calculateMotorcycleBill(garage.get(id));
+			total += calculateMotorcycleBill((Motorcycle)garage.get(id));
 		}
 		if(garage.get(id).getType().equals("rocket")) {
-			total += calculateRocketBill(garage.get(id));
+			total += calculateRocketBill((Rocket)garage.get(id));
 		}
 		return total;	
 	}
